@@ -8,14 +8,16 @@
 import UIKit
 
 final class Router {
-  static func showGtihubSearch(now: UIViewController) {
+
+  static private var rootViewController: UIViewController {
     let vc = UIStoryboard(name: "GithubSearchMVP", bundle: nil).instantiateInitialViewController() as! GithubSearchMVPViewController
     let presenter = GithubSearchPresenter(output: vc)
     vc.inject(presenter: presenter)
-    if let nav = now.navigationController {
-      nav.pushViewController(vc, animated: true)
-    } else {
-      now.present(vc, animated: true, completion: nil)
-    }
+    return vc
+  }
+
+  static func showRoot(window: UIWindow) {
+    window.rootViewController = rootViewController
+    window.makeKeyAndVisible()
   }
 }
