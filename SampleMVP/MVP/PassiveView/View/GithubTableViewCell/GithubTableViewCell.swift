@@ -8,12 +8,11 @@
 import UIKit
 
 final class GithubTableViewCell: UITableViewCell {
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var urlLabel: UILabel!
 
-  @IBOutlet private weak var titleLabel: UILabel!
-  @IBOutlet private weak var urlLabel: UILabel!
-
-  func configure(githubModel: GithubModel) {
-    titleLabel.text = githubModel.name
-    urlLabel.text = githubModel.urlStr
-  }
+    func configure(githubModel: GithubModel) {
+        titleLabel.text = githubModel.name
+        urlLabel.text = githubModel.urlStr
+    }
 }
