@@ -8,25 +8,24 @@
 import UIKit
 
 final class GithubSearchMVPViewController: UIViewController {
-    @IBOutlet private var sortTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet private weak var sortTypeSegmentedControl: UISegmentedControl!
 
-    @IBOutlet private var tableView: UITableView! {
+    @IBOutlet private weak var tableView: UITableView! {
         didSet {
             let cell = UINib(nibName: "GithubTableViewCell", bundle: nil)
             tableView.register(cell, forCellReuseIdentifier: GithubTableViewCell.description())
         }
     }
-
-    private var presenter: GithubSearchPresenter!
-    func inject(presenter: GithubSearchPresenter) {
+    
+    private var presenter: GithubSearchPresenterInput!
+    func inject(presenter: GithubSearchPresenterInput) {
         self.presenter = presenter
     }
 }
 
 extension GithubSearchMVPViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else { return }
-        presenter.searchText(searchText, sortType: sortTypeSegmentedControl.isSelected)
+        presenter.searchText(searchBar.text, sortType: sortTypeSegmentedControl.isSelected)
     }
 }
 

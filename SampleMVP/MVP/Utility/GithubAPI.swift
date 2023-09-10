@@ -21,7 +21,7 @@ final class GithubAPI: GithubAPIProtocol {
     private init() {}
 
     func get(searchWord: String, isDesc: Bool = true, result: ((Result<[GithubModel], GithubError>) -> Void)? = nil) {
-        guard searchWord.count > 0 else {
+        guard !searchWord.isEmpty else {
             result?(.failure(.error))
             return
         }

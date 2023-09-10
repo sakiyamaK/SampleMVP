@@ -10,7 +10,7 @@ import Foundation
 // 入力に関するprotocol
 protocol GithubSearchPresenterInput {
     var numberOfModels: Int { get }
-    func searchText(_ text: String, sortType: Bool)
+    func searchText(_ text: String?, sortType: Bool)
     func didSelect(index: Int)
     func githubModel(index: Int) -> GithubModel?
 }
@@ -20,12 +20,13 @@ protocol GithubSearchPresenterOutput: AnyObject {
     func updateModels(_ models: [GithubModel])
 }
 
-// PresenterはInputとOutputのprotocolに準拠する
+// PresenterはInputのprotocolに準拠する
 final class GithubSearchPresenter: GithubSearchPresenterInput {
     private weak var output: GithubSearchPresenterOutput!
     private var api: GithubAPIProtocol!
     private var models: [GithubModel]
 
+    // GithubSearchPresenterOutputはViewControllerが実装している
     init(output: GithubSearchPresenterOutput, api: GithubAPIProtocol = GithubAPI.shared) {
         self.output = output
         self.api = api
@@ -43,7 +44,8 @@ final class GithubSearchPresenter: GithubSearchPresenterInput {
         print(models[index])
     }
 
-    func searchText(_ text: String, sortType: Bool) {
+    func searchText(_ text: String?, sortType: Bool) {
+        guard let text else { return }
         api.get(searchWord: text, isDesc: sortType) { [weak self] result in
             switch result {
             case let .success(models):
@@ -52,6 +54,7 @@ final class GithubSearchPresenter: GithubSearchPresenterInput {
                     self?.output.updateModels(models)
                 }
             case let .failure(error):
+                print(error)
                 break
             }
         }
