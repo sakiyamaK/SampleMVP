@@ -15,7 +15,6 @@ class TestGithubSearchPresenterOutput: GithubSearchPresenterOutput {
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
     
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -29,9 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.presenter = presenter
 //        self.vc = vc
         
-        let window = UIWindow()
-        self.window = window
-        Router.showRoot(window: window)
+        Router.shared.showRoot(window: UIWindow())
         return true
     }
 }

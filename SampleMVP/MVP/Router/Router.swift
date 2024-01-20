@@ -8,14 +8,19 @@
 import UIKit
 
 final class Router {
-    private static var rootViewController: UIViewController {
+    private var window: UIWindow!
+    static let shared: Router = .init()
+    private init() {}
+    
+    private var rootViewController: UIViewController {
         let vc = UIStoryboard(name: "GithubSearchMVP", bundle: nil).instantiateInitialViewController() as! GithubSearchMVPViewController
         let presenter = GithubSearchPresenter(output: vc)
         vc.inject(presenter: presenter)
         return vc
     }
 
-    static func showRoot(window: UIWindow) {
+    func showRoot(window: UIWindow) {
+        self.window = window
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
     }
