@@ -16,6 +16,9 @@ class TestGithubSearchPresenterOutput: GithubSearchPresenterOutput {
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    private var presenter: GithubSearchPresenter!
+    private var vc: TestGithubSearchPresenterOutput!
+
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
 //        let vc = TestGithubSearchPresenterOutput()
@@ -25,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        presenter.searchText("android", sortType: false)
 //        presenter.searchText("", sortType: false)
 //        presenter.searchText(nil, sortType: false)
+//        
 //        self.presenter = presenter
 //        self.vc = vc
         
