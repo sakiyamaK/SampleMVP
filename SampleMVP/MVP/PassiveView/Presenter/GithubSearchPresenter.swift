@@ -45,7 +45,7 @@ final class GithubSearchPresenter: GithubSearchPresenterInput {
     }
 
     func searchText(_ text: String?, sortType: Bool) {
-        guard let text else { return }
+        guard let text, !text.isEmpty else { return }
         api.get(searchWord: text, isDesc: sortType) { [weak self] result in
             switch result {
             case let .success(models):
